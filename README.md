@@ -203,53 +203,6 @@ Files: `data/policy_decision_log_filled.csv` | `outputs/grey_zone_categories.png
 
 ---
 
-## Known Limitations
-
-1. **Coded language failure.** TF-IDF cannot detect dog-whistle terms, coded references,
-   or recently coined slang. These require continuous lexicon updates or a context-aware model.
-
-2. **Context blindness.** "I hate racists" and "I hate [racial group]" score similarly.
-   TF-IDF sees the word "hate" — it does not see intent.
-
-3. **English-only.** Trained on English tweets. Not validated for multilingual content.
-
-4. **Static training data.** The Davidson 2017 dataset is nearly a decade old.
-   Hate speech vocabulary has evolved substantially. Regular retraining is required.
-
-5. **Platform-specificity.** Trained on Twitter data. Performance on Reddit, YouTube,
-   WhatsApp, or Discord is not validated.
-
-6. **Severe imbalance ceiling.** At 16.33:1 imbalance with TF-IDF features, the model
-   achieves F1=0.34 on the hate class even with class weighting and threshold tuning.
-   This is a hard architectural ceiling, not a tuning problem.
-
----
-
-## What a Production Version Would Look Like
-
-1. Fine-tune **HateBERT** (BERT pre-trained on banned Reddit content) — expected F1 > 0.70
-2. Add **character-level features** to catch intentional misspellings ("h4te", "k!ll")
-3. Build an **active learning pipeline** where human reviewer decisions continuously retrain the model
-4. Deploy **drift monitoring** to detect vocabulary shift from the training distribution
-5. Implement a **reviewer wellbeing program** — content moderation causes documented psychological harm
-
----
-
-## Honest Assessment
-
-This is a portfolio demonstration. The classifier is functional and the methodology is sound.
-It should not be deployed on a real platform for three reasons:
-
-1. The training data is from 2017 — hate speech vocabulary has changed substantially
-2. TF-IDF + Logistic Regression is outperformed by transformer models by a wide margin on this task
-3. Grey zone annotation covers 100 of 500 identified uncertain tweets — a genuine sample,
-   but inter-rater agreement was not measured (single annotator)
-
-These limitations are documented explicitly because Trust & Safety work requires
-intellectual honesty about what a system can and cannot do.
-
----
-
 *Dataset credit: Davidson, T., Warmsley, D., Macy, M. & Weber, I. (2017).
 "Automated Hate Speech Detection and the Problem of Offensive Language."
 Proceedings of the 11th AAAI International Conference on Web and Social Media.*
