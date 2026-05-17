@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Raw dataset — not ours to redistribute (25MB)
+# Download from: https://github.com/t-davidson/hate-speech-and-offensive-language/tree/master/data
+data/labeled_data.csv
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
